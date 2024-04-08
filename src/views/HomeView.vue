@@ -1,9 +1,34 @@
 <template>
   <div class="h-full">
     <el-container class="h-full">
-      <el-aside width="20%" class="bg-blue-100">
+      <el-aside :width="isCollapse ? '64px' : '200px'">
         <div class="w-full h-[60px] bg-amber-500 flex justify-center items-center">
           侧边栏
+        </div>
+        <div class="h-[calc(100%-90px)] bg-amber-800">
+          我是菜单部分
+        </div>
+        <div class="w-full h-[30px] flex items-center pl-2.5 cursor-pointer" @click="isFold">
+          <el-tooltip
+              class="box-item"
+              effect="dark"
+              content="点击折叠"
+              placement="right"
+              v-if="isCollapse===false"
+          >
+            <el-icon><Fold/></el-icon>
+
+          </el-tooltip>
+          <el-tooltip
+              class="box-item"
+              effect="dark"
+              content="点击展开"
+              placement="right"
+              v-else
+          >
+            <el-icon><Expand/></el-icon>
+          </el-tooltip>
+
         </div>
       </el-aside>
       <el-container class="w-4/5">
@@ -26,6 +51,13 @@
 </template>
 
 <script setup lang="ts">
+import {ref} from 'vue'
+import {Fold, Expand} from '@element-plus/icons-vue'
+
+const isCollapse = ref<boolean>(false)
+const isFold = () => {
+  isCollapse.value = !isCollapse.value
+}
 </script>
 
 <style lang="scss" scoped>
