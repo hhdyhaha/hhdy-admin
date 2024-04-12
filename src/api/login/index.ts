@@ -2,7 +2,7 @@ import axiosInstance from '@/utils/http'
 import type { AxiosPromise } from 'axios';
 import type {LoginData,LoginResult} from "@/api/login/types";
 
-// 通义千问api
+// 登录api
 export const loginApi = (data: LoginData):AxiosPromise<LoginResult>=> {
     console.log('data',data)
     return axiosInstance({
