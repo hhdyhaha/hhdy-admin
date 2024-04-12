@@ -4,8 +4,7 @@ import axios, {type InternalAxiosRequestConfig, type AxiosInstance, type AxiosRe
 const axiosInstance: AxiosInstance = axios.create({
     baseURL: import.meta.env.VITE_APP_BASE_API,
     timeout: 5000,
-    withCredentials: false,
-    headers: {'Content-Type': 'application/json'}
+    withCredentials: false
 })
 
 // 添加请求拦截器
