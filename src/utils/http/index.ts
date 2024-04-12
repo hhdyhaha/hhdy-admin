@@ -1,11 +1,11 @@
-import axios, { type InternalAxiosRequestConfig, type AxiosInstance, type AxiosResponse } from 'axios'
+import axios, {type InternalAxiosRequestConfig, type AxiosInstance, type AxiosResponse} from 'axios'
 
 // 通过create方法,创建axios实例
 const axiosInstance: AxiosInstance = axios.create({
-    baseURL: import.meta.env.VITE_BASE_URL,
+    baseURL: import.meta.env.VITE_APP_BASE_API,
     timeout: 5000,
     withCredentials: false,
-    headers: { 'Content-Type': 'application/json;' }
+    headers: {'Content-Type': 'application/json'}
 })
 
 // 添加请求拦截器
@@ -13,7 +13,7 @@ axiosInstance.interceptors.request.use(
     (config: InternalAxiosRequestConfig) => {
         // 从本地存储或状态管理获取令牌
         // const token = localStorage.getItem('token');
-        const token: string = '获取你存储的token'
+        const token: string = 'please get your save token'
         // 如果存在令牌，在请求头中携带
         if (token) {
             config.headers.Authorization = token

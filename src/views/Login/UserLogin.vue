@@ -6,8 +6,8 @@
       </div>
       <div class="w-full h-4/6 bg-blue-100 flex justify-center items-center">
         <el-form ref="formRef" :model="form" :rules="rules" label-width="auto" style="max-width: 600px">
-          <el-form-item prop="userName">
-            <el-input v-model="form.userName" placeholder="请输入用户名" :prefix-icon="User"/>
+          <el-form-item prop="username">
+            <el-input v-model="form.username" placeholder="请输入用户名" :prefix-icon="User"/>
           </el-form-item>
           <el-form-item prop="password">
             <el-input
@@ -28,22 +28,24 @@ import {ref, reactive} from 'vue'
 import {User, Lock} from '@element-plus/icons-vue'
 import type {FormInstance, FormRules} from 'element-plus'
 import {useRouter} from 'vue-router'
+import {loginApi} from "@/api/login";
+import type {LoginData} from "@/api/login/types";
 
 const router = useRouter();
 
 interface RuleForm {
-  userName: string
+  username: string
   password: string
 }
 
 const formRef = ref<FormInstance>()
 const form = reactive<RuleForm>({
-  userName: '',
+  username: '',
   password: ''
 })
 
 const rules = reactive<FormRules<RuleForm>>({
-  userName: [
+  username: [
     {required: true, message: '请输入用户名', trigger: 'blur'},
     {min: 3, max: 5, message: '用户名为3到5位', trigger: 'blur'},
   ],
@@ -58,7 +60,12 @@ const onSubmit = async (formRef: FormInstance | undefined) => {
   if (!formRef) return
   await formRef.validate((valid, fields) => {
     if (valid) {
-      console.log('提交', valid)
+      console.log('form.username!', typeof form.username)
+      const params = {
+        username: form.username,
+        password: form.password
+      }
+      login(params)
       router.push({
         name: 'home'
       })
@@ -68,6 +75,14 @@ const onSubmit = async (formRef: FormInstance | undefined) => {
   })
 }
 
+// 登录
+const login = async (data: LoginData) => {
+  await loginApi(data).then((res) => {
+    console.log('res',res)
+  }).catch((err) => {
+    console.log('err',err)
+  })
+}
 
 </script>
 

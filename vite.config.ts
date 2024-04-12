@@ -28,7 +28,7 @@ export default defineConfig(({command, mode})=>{
     server: {
       proxy: {
         [env.VITE_APP_BASE_API]: {
-          target: 'http://localhost:3000',
+          target: 'http://vapi.youlai.tech',
           changeOrigin: true,
           rewrite: (path) => path.replace(new RegExp('^'+env.VITE_APP_BASE_API), '')
         }
