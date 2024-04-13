@@ -23,6 +23,13 @@ const router = createRouter({
 
 router.beforeEach((to, from) => {
     document.title = to.meta.title as string
+    // 判断用户是否已经登录
+    if (to.path !== '/Login' && !sessionStorage.getItem('token')) {
+        return '/Login'
+    }else{
+        // 获取用户角色权限之后，根据角色生成动态路由
+        console.log('有权限，可以访问，生成动态路由')
+    }
     return true
 })
 
