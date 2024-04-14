@@ -1,10 +1,10 @@
-import { loginApi, logoutApi } from "@/api/auth";
-import { getUserInfoApi } from "@/api/user";
-import { resetRouter } from "@/router";
-import { store } from "@/stores";
+import {loginApi, logoutApi} from "@/api/auth";
+import {getUserInfoApi} from "@/api/user";
+import {resetRouter} from "@/router";
+import {store} from "@/stores";
 
-import type { LoginData } from "@/api/auth/types";
-import type { UserInfo } from "@/api/user/types";
+import type {LoginData} from "@/api/auth/types";
+import type {UserInfo} from "@/api/user/types";
 
 import {ref} from "vue"
 import {defineStore} from "pinia"
@@ -25,7 +25,7 @@ export const useUserStore = defineStore("user", () => {
         return new Promise<void>((resolve, reject) => {
             loginApi(loginData)
                 .then((response) => {
-                    const { tokenType, accessToken } = response.data;
+                    const {tokenType, accessToken} = response.data;
                     localStorage.setItem("accessToken", tokenType + " " + accessToken); // Bearer eyJhbGciOiJIUzI1NiJ9.xxx.xxx
                     resolve();
                 })
@@ -39,7 +39,8 @@ export const useUserStore = defineStore("user", () => {
     function getUserInfo() {
         return new Promise<UserInfo>((resolve, reject) => {
             getUserInfoApi()
-                .then(({ data }) => {
+                .then((res:any) => {
+                    const data = res.data.data
                     if (!data) {
                         reject("Verification failed, please Login again.");
                         return;
@@ -48,7 +49,8 @@ export const useUserStore = defineStore("user", () => {
                         reject("getUserInfo: roles must be a non-null array!");
                         return;
                     }
-                    Object.assign(user.value, { ...data });
+                    user.value.roles = data.roles;
+                    user.value.perms = data.perms;
                     resolve(data);
                 })
                 .catch((error) => {

@@ -13,7 +13,7 @@ export interface UserInfo {
 /**
  * 用户查询对象类型
  */
-export interface UserQuery extends PageQuery {
+export interface UserQuery {
   keywords?: string;
   status?: number;
   deptId?: number;

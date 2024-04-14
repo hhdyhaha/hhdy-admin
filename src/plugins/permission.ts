@@ -7,7 +7,6 @@ import type { RouteRecordRaw } from "vue-router";
 export function setupPermission() {
     // 白名单路由
     const whiteList = ["/login"];
-
     router.beforeEach(async (to, from, next) => {
         NProgress.start();
         const hasToken = localStorage.getItem("accessToken");
@@ -37,9 +36,10 @@ export function setupPermission() {
                         });
                         next({ ...to, replace: true });
                     } catch (error) {
+                        console.log(4,error)
                         // 移除 token 并跳转登录页
                         await userStore.resetToken();
-                        next(`/login?redirect=${to.path}`);
+                        next('/login');
                         NProgress.done();
                     }
                 }
@@ -49,7 +49,7 @@ export function setupPermission() {
             if (whiteList.indexOf(to.path) !== -1) {
                 next();
             } else {
-                next(`/login?redirect=${to.path}`);
+                next(`/login`);
                 NProgress.done();
             }
         }

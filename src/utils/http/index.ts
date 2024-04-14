@@ -11,11 +11,11 @@ const axiosInstance: AxiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
     (config: InternalAxiosRequestConfig) => {
         // 从本地存储或状态管理获取令牌
-        // const token = localStorage.getItem('token');
-        const token: string = 'please get your save token'
+        const token = localStorage.getItem('accessToken');
+        // const token: string = 'please get your save token'
         // 如果存在令牌，在请求头中携带
         if (token) {
-            config.headers.Authorization = token
+            config.headers.Authorization = `Bearer ${token}`
         }
         // 在发送请求之前做些什么
         return config

@@ -1,6 +1,5 @@
 import type { RouteRecordRaw } from "vue-router";
 import { constantRoutes } from "@/router";
-import { store } from "@/stores";
 import { listRoutes } from "@/api/menu";
 
 import {ref} from "vue"
@@ -90,8 +89,9 @@ export const usePermissionStore:any = defineStore("permission", () => {
             // 接口获取所有路由
             listRoutes()
                 .then(({ data: asyncRoutes }) => {
+                    console.log("asyncRoutes", asyncRoutes)
                     // 根据角色获取有访问权限的路由
-                    const accessedRoutes = filterAsyncRoutes(asyncRoutes, roles);
+                    const accessedRoutes = filterAsyncRoutes(asyncRoutes.data, roles);
                     setRoutes(accessedRoutes);
                     resolve(accessedRoutes);
                 })

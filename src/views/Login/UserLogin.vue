@@ -66,9 +66,10 @@ const onSubmit = async (formRef: FormInstance | undefined) => {
         password: form.password
       }
       login(params)
-      router.push({
-        name: 'home'
-      })
+      console.log('登录成功')
+      // router.push({
+      //   name: 'home'
+      // })
     } else {
       console.log('错误提交!', fields)
     }
@@ -79,6 +80,17 @@ const onSubmit = async (formRef: FormInstance | undefined) => {
 const login = async (data: LoginData) => {
   await loginApi(data).then((res) => {
     console.log('res',res)
+    if(res.status===200){
+      const data = res.data.data
+      console.log('data',data)
+      if(data.accessToken){
+        localStorage.setItem('accessToken',data.accessToken)
+        router.push({
+          name: 'home'
+        })
+      }
+    }
+
   }).catch((err) => {
     console.log('err',err)
   })
