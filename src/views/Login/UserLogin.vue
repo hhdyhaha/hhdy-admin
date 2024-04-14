@@ -60,18 +60,11 @@ const onSubmit = async (formRef: FormInstance | undefined) => {
   if (!formRef) return
   await formRef.validate((valid, fields) => {
     if (valid) {
-      console.log('form.username!', typeof form.username)
       const params = {
         username: form.username,
         password: form.password
       }
       login(params)
-      console.log('登录成功')
-      // router.push({
-      //   name: 'home'
-      // })
-    } else {
-      console.log('错误提交!', fields)
     }
   })
 }
@@ -79,12 +72,10 @@ const onSubmit = async (formRef: FormInstance | undefined) => {
 // 登录
 const login = async (data: LoginData) => {
   await loginApi(data).then((res) => {
-    console.log('res',res)
-    if(res.status===200){
+    if (res.status === 200) {
       const data = res.data.data
-      console.log('data',data)
-      if(data.accessToken){
-        localStorage.setItem('accessToken',data.accessToken)
+      if (data.accessToken) {
+        localStorage.setItem('accessToken', data.accessToken)
         router.push({
           name: 'home'
         })
@@ -92,7 +83,7 @@ const login = async (data: LoginData) => {
     }
 
   }).catch((err) => {
-    console.log('err',err)
+    console.log('err', err)
   })
 }
 

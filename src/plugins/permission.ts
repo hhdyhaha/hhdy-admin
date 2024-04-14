@@ -36,7 +36,6 @@ export function setupPermission() {
                         });
                         next({ ...to, replace: true });
                     } catch (error) {
-                        console.log(4,error)
                         // 移除 token 并跳转登录页
                         await userStore.resetToken();
                         next('/login');
