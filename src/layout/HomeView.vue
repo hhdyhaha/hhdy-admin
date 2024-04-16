@@ -6,7 +6,7 @@
           侧边栏
         </div>
         <div class="h-[calc(100%-90px)] bg-amber-800">
-          我是菜单部分
+          <Sidebar></Sidebar>
         </div>
         <div class="w-full h-[30px] flex items-center pl-2.5 cursor-pointer" @click="isFold">
           <el-tooltip
@@ -53,6 +53,7 @@
 <script setup lang="ts">
 import {ref} from 'vue'
 import {Fold, Expand} from '@element-plus/icons-vue'
+import Sidebar from './components/Sidebar/index.vue'
 
 const isCollapse = ref<boolean>(false)
 const isFold = () => {
