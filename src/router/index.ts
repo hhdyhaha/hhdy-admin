@@ -1,13 +1,11 @@
 import {createRouter, createWebHistory, type RouteRecordRaw} from 'vue-router'
-import HomeView from '../layout/HomeView.vue'
-import UserLogin from "@/views/Login/UserLogin.vue";
 
 // 静态路由
 export const constantRoutes = [
     {
         path: '/',
         name: 'home',
-        component: HomeView,
+        component: ()=>import('../layout/HomeView.vue'),
         meta: {
             title: '首页',
             hidden: true
@@ -16,7 +14,7 @@ export const constantRoutes = [
     {
         path: '/login',
         name: 'login',
-        component: UserLogin,
+        component: ()=>import('../views/Login/UserLogin.vue'),
         meta: {
             title: '登录',
             hidden: true
