@@ -11,6 +11,7 @@ import {ElementPlusResolver} from 'unplugin-vue-components/resolvers'
 export default defineConfig(({command, mode})=>{
   const env = loadEnv(mode, process.cwd())
   return{
+    base: './',
     plugins: [
       vue(),
       AutoImport({
