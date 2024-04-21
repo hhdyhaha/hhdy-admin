@@ -5,7 +5,7 @@
         <div class="w-full h-[60px] bg-amber-500 flex justify-center items-center">
           侧边栏
         </div>
-        <div class="h-[calc(100%-90px)] bg-amber-800">
+        <div class="h-[calc(100%-90px)]">
           <Sidebar></Sidebar>
         </div>
         <div class="w-full h-[30px] flex items-center pl-2.5 cursor-pointer" @click="isFold">
@@ -53,7 +53,7 @@
 <script setup lang="ts">
 import {ref} from 'vue'
 import {Fold, Expand} from '@element-plus/icons-vue'
-import Sidebar from './components/Sidebar/index.vue'
+import Sidebar from './components/Sidebar/SidebarIndex.vue'
 
 const isCollapse = ref<boolean>(false)
 const isFold = () => {
