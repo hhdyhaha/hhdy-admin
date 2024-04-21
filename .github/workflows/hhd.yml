@@ -1,8 +1,12 @@
 name: 项目部署
 on: push
+
+permissions:
+  contents: write
+
 jobs:
   npm-build:
-    name: 打包
+    name: 打包部署
     runs-on: ubuntu-latest
     steps:
       - name: 读取仓库代码
@@ -12,3 +16,8 @@ jobs:
           npm install -g pnpm
           pnpm install
           pnpm run build-only
+      - name: 部署
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: dist
