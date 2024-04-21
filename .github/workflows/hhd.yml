@@ -1,5 +1,5 @@
 name: 项目部署
-  on:push
+  on: push
   jobs:
     npm-build:
       name: 打包
