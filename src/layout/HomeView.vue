@@ -33,11 +33,8 @@
       </el-aside>
       <el-container class="w-4/5">
         <el-header class="flex justify-start items-center bg-blue-50">
-          <div class="w-1/2 h-full bg-blue-300 flex items-center">
-            首页
-          </div>
-          <div class="w-1/2 h-full bg-amber-500 flex justify-end items-center">
-            用户名
+          <div class="w-full flex items-center justify-center">
+            欢迎👏
           </div>
         </el-header>
         <el-main class="w-full h-full bg-blue-200">
